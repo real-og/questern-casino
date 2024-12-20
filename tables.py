@@ -1,4 +1,9 @@
 import gspread
+import os
+
+
+SHEET_LINK = str(os.environ.get('SHEET_LINK'))
+
 
 class WorkSheet:
     def __init__(self, link: str):
@@ -6,8 +11,15 @@ class WorkSheet:
         self.account = gspread.service_account(filename='key.json')
         self.sheet = self.account.open_by_url(self.link).sheet1
 
-    def append_request(self, id: int, username: str, time: str, full_name: str = 'Без имени'):
-        self.sheet.append_row([id, username, full_name, time])
+    def update_range(self, range, data):
+        self.sheet.update(range, data)
 
-    def append_f(self):
-        self.sheet.append_row(['f'])
+    def get_data(self):
+        return self.sheet.get_all_values()
+        
+
+
+
+sheet = WorkSheet(SHEET_LINK)
+
+

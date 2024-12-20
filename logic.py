@@ -5,6 +5,62 @@ import keyboards as kb
 import aior
 
 
+async def get_all_score(id):
+
+    data = await aior.get_json(str(id))
+
+    points_all = 0
+
+    points = 0
+    if data.get('col1') == 'red':
+        points = 10
+    if data.get('val1') == '23':
+        points = 30
+    if data.get('val1') == '23' and data.get('col1') == 'red':
+        points = 50
+    points_all += points
+
+    points = 0
+    if data.get('col2') == 'red':
+        points = 10
+    if data.get('val2') == '1':
+        points = 30
+    if data.get('val2') == '1' and data.get('col2') == 'red':
+        points = 50
+    points_all += points
+
+    points = 0
+    if data.get('col3') == 'black':
+            points = 10
+    if data.get('val3') == '4':
+        points = 30
+    if data.get('val3') == '4' and data.get('col3') == 'black':
+        points = 50
+    points_all += points
+
+    points = 0
+    if data.get('col4') == 'black':
+            points = 10
+    if data.get('val4') == '29':
+        points = 30
+    if data.get('val4') == '29' and data.get('col4') == 'black':
+        points = 50
+    points_all += points
+
+    points = 0
+    if data.get('col5') == 'red':
+            points = 10
+    if data.get('val5') == '34':
+        points = 30
+    if data.get('val5') == '34' and data.get('col5') == 'red':
+        points = 50
+    points_all += points
+    return points_all
+
+
+
+
+
 async def get_result(id, round):
     data = await aior.get_json(str(id))
     points = 0
@@ -80,5 +136,16 @@ async def broadcast_result(user_ids):
     for user_id in user_ids:
         text, points = await get_result(str(user_id), round)
         await bot.send_message(user_id, text)
+
     return points
+
+
+async def broadcast_final(user_ids):
+    for user_id in user_ids:
+        final_score = await get_all_score(user_id)
+        text = f"""Сегодня в рулетке вы выиграли {final_score} баллов. """
+        await bot.send_message(user_id, text)
+        await bot.send_message(user_id, 'Спасибо вам за игру, и пусть удача всегда будет на вашей стороне! 💫')
+
+
         
