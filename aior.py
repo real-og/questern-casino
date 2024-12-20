@@ -45,7 +45,7 @@ async def set_json(redis_key, data):
 
     # Закрываем соединение
     await client.close()
-    print(f"JSON сохранен в Redis по ключу {redis_key}")
+
 
 async def get_json(redis_key):
     """Получение JSON из Redis и десериализация в Python-словарь"""
@@ -63,5 +63,5 @@ async def get_json(redis_key):
         return data
     else:
         await client.close()
-        print(f"Данные с ключом {redis_key} не найдены.")
+
         return None

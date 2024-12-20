@@ -120,9 +120,14 @@ async def read_from_file():
         return content
     
 
-async def broadcast_red_black(user_ids):
+async def broadcast_red_black(user_ids, round):
+    text = f"""РАУНД {round}
+
+🔴⚫️ КРАСНОЕ ИЛИ ЧЁРНОЕ  
+Чтобы сделать ставку, используйте кнопки внизу экрана ⤵️
+"""
     for user_id in user_ids:
-        await bot.send_message(user_id, 'Выбирайте цвет', reply_markup=kb.red_black_kb)
+        await bot.send_message(user_id, text, reply_markup=kb.red_black_kb)
 
 
 async def broadcast_close(user_ids):

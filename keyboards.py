@@ -8,8 +8,8 @@ start_kb = ReplyKeyboardMarkup([[texts.start_btn]],
                                      one_time_keyboard=True)
 
 red_black_kb = InlineKeyboardMarkup(row_width=2)
-button_black = InlineKeyboardButton("===ЧЁРНОЕ===", callback_data="black")
-button_red = InlineKeyboardButton("=== КРАСНОЕ ===", callback_data="red")
+button_black = InlineKeyboardButton("ЧЁРНОЕ", callback_data="black")
+button_red = InlineKeyboardButton("КРАСНОЕ", callback_data="red")
 red_black_kb.add(button_black, button_red)
 
 

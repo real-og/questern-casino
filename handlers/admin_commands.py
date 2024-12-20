@@ -14,7 +14,7 @@ async def send_welcome(message: types.Message, state: FSMContext):
         return
     await logic.write_to_file(message.text)
     users = await aior.get_numbers_from_list('users')
-    await logic.broadcast_red_black(users)
+    await logic.broadcast_red_black(users, message.text.strip().split()[1])
     await message.answer('ok')
 
 
@@ -60,7 +60,6 @@ async def send_welcome(message: types.Message, state: FSMContext):
                str(score)
             ]
         data_to_write.append(row)
-    print(data_to_write)
     tables.sheet.update_range(data_to_write, 'A1:H3000')
     await message.answer('ok')
 

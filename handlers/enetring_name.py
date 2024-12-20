@@ -47,7 +47,12 @@ async def send_series(callback: types.CallbackQuery, state: FSMContext):
             data['col4'] = 'black'
         elif '5' in state:
             data['col5'] = 'black'
-        await callback.message.edit_text('СТАВКА НА ЧИСЛО', reply_markup=kb.numbers_kb)
+        text_new = """ ☑️ Ваша ставка принята
+
+СТАВКА НА ЧИСЛО
+
+Чтобы сделать ставку, нажмите на одну из кнопок ⤵️"""
+        await callback.message.edit_text(text_new, reply_markup=kb.numbers_kb)
     elif info == 'red':
         if '1' in state:
             data['col1'] = 'red'
@@ -72,6 +77,5 @@ async def send_series(callback: types.CallbackQuery, state: FSMContext):
         elif '5' in state:
             data['val5'] = info
         await callback.message.edit_text('☑️ Ваша ставка принята')
-    print(data)
     await aior.set_json(str(callback.from_user.id), data)
     await bot.answer_callback_query(callback.id)
