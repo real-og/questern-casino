@@ -3,6 +3,7 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.contrib.fsm_storage.redis import RedisStorage2
 import logging
 import os
+import aior
 
 
 logging.basicConfig(level=logging.WARNING)
